@@ -1,7 +1,7 @@
 package receiver
 
 import (
-	"Alarm2File/internal/common"
+	"Hedwig/internal/common"
 	"encoding/json"
 	"github.com/google/uuid"
 	"net/http"

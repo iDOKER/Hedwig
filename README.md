@@ -1,6 +1,6 @@
-# N9E-compatible alarm repeater
+# N9E-Compatible Alarm Repeater
 
-[English](./README.md) | [简体中文](../README_zh.md)
+[English](./README.md) | [简体中文](./doc/README_zh-cn.md)
 
 > Note: The json data structure of the N9E in this project has been adjusted. It is not the original N9E data structure. If you want to be compatible with the N9E data structure, please adjust the structure on the receiver side.
 

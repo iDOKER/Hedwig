@@ -1,4 +1,4 @@
-module Alarm2File
+module Hedwig
 
 go 1.23.3
 

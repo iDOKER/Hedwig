@@ -1,7 +1,7 @@
 package sender
 
 import (
-	"Alarm2File/internal/common"
+	"Hedwig/internal/common"
 	"bytes"
 	"crypto/tls"
 	"fmt"
