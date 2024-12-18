@@ -1,4 +1,6 @@
-# 兼容 N9E 的一个告警转发器
+# 兼容 N9E 的告警转发器
+
+[English](../README.md) | [简体中文](./README_zh-cn.md)
 
 > 注意事项，本项目 N9E 的 json 数据结构有做过调整，并不是原版的 N9E 数据结构，如果要兼容 N9E 的数据结构请调整 receiver 端的结构体。
 

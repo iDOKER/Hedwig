@@ -1,19 +1,21 @@
-# 兼容 N9E 的一个告警转发器
+# N9E-compatible alarm repeater
 
-> 注意事项，本项目 N9E 的 json 数据结构有做过调整，并不是原版的 N9E 数据结构，如果要兼容 N9E 的数据结构请调整 receiver 端的结构体。
+[English](./README.md) | [简体中文](../README_zh.md)
 
-## 主要功能
+> Note: The json data structure of the N9E in this project has been adjusted. It is not the original N9E data structure. If you want to be compatible with the N9E data structure, please adjust the structure on the receiver side.
 
-1. 利用 N9E 的告警回调功能接收告警信息，将其转化为文件
-2. 文件内为告警信息，可任意处理，比如上传到其他地方
-3. 在发送端，会将文件转换为 N9E 的远程调用，再发送给真实的回调地址，实现告警信息的转发
+## Main functions
 
-## 适用场景
+1. Use N9E's alarm callback function to receive alarm information and convert it into a file
+2. Alarm information is contained in the file, which can be processed at will, such as uploading it to other places
+3. At the sender, the file will be converted into a remote call from N9E and sent to the real callback address to forward alarm information
 
-1. N9E 运行环境不支持网络直接调用远程服务
-2. N9E 告警信息的统一采集回收
+## Application scenarios
 
-## 运行环境
+1. The N9E operating environment does not support direct network invocation of remote services
+2. Unified collection and recycling of N9E alarm information
+
+## Run environment
 
 - go version 1.23.0+
 - x86 linux
@@ -21,11 +23,11 @@
 
 ## TODO
 
-- [x] 转发时信息加密 
-- [x] 转发信息备份，并定期清理
-- [x] 支持日志级别自定义
-- [x] 自定义加密文件前缀和后缀，以兼容各种类型网闸设备
-- [x] 发送失败重试
-- [] 支持告警信息过滤，转发包含特定字符的告警，或用于屏蔽某些告警
-- [x] 记录转发日志内容到本地文件，方便搜索追踪，避免扯皮，支持定期清理
+- [x] Information encryption during forwarding
+- [x] Forward backup information and clean it up regularly
+- [x] Support log level customization
+- [x] Customize encryption file prefixes and suffixes to be compatible with various types of gatekeepers
+- [x] Send failed retry
+- [] Support alarm information filtering, forward alarms containing specific characters, or used to block certain alarms
+- [x] Record forwarding log content to local files, to facilitate search tracking, to avoid disputes, support regular clean-up
 
