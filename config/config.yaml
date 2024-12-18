@@ -1,0 +1,30 @@
+mode: "sender" # receiver 或 sender，表示程序的运行模式
+receiver:
+  listen_address: ":8080" # 接收端的监听地址
+  output_dir: "./data"    # 接收端生成文件的存储目录
+  header_key: "DVS99hSjAf" # 接收端用于校验身份的 header_key
+  header_value: "STitL3CBwuR4oyfSQmSedMfoYFv9NRmp" # 接收端用于校验身份的 header_value
+  encrypt_token : "742211DA-ADA6-4770-8EB2-3C1D24467CE6" # 接收端用于加密数据的 encrypt_token 值为 UUID，可自定义
+sender:
+  watch_dir: "./data"     # 发送端监控的目录
+  target_url: "https://www.example.com/api/dingtalk/content" # 发送端目标回调接口
+  timeout: 30 # 发送端的超时时间，单位为秒
+  retry_count: 2 # 发送端重试次数
+  retry_interval: 1 # 发送端重试间隔时间，单位为秒
+  ssl_verify: false # 是否对目标接口的 SSL 证书进行校验
+  header_key: "DVS99hSjAf" # 发送端用于校验身份的 header_key
+  header_value: "STitL3CBwuR4oyfSQmSedMfoYFv9NRmp" # 发送端用于校验身份的 header_value
+  encrypt_token : "742211DA-ADA6-4770-8EB2-3C1D24467CE6" # 发送端用于解密数据的 encrypt_token 值为 UUID，可自定义
+common:
+  file_prefix: "EmergencyAlarm_" # 文件名前缀，默认为 alarm2file，可自定义
+  file_suffix: ".tar.gz" # 文件名后缀，默认为 .json，可自定义
+  log_to_file: false # 是否输出到文件，默认为 false，开启日志级别为 DEBUG 会打印出所有原始数据，可用于审计
+  log_level: "DEBUG" # 日志级别，可选值有 DEBUG、INFO、WARN、ERROR，默认为 INFO，大小写不敏感
+  log_dir: "./logs" # 日志文件目录
+  log_max_size: 100 # 单个日志文件的最大大小，单位为 MB，按照这个大小进行切割，默认为 100 MB
+  log_max_age: 7 # 保留旧日志文件的最大天数，0 表示无限制，保留多少天的文件
+  log_max_count: 0 # 保留旧日志文件的最大数量，0 表示无限制，保留多少个文件
+  data_backup_enable: true # 是否备份已操作的数据，默认为 false
+  data_backup_dir: "./backup" # 备份数据的目录
+  data_backup_max_age: 7 # 保留备份数据的最大天数，0 表示无限制
+  data_backup_max_interval: 10 # 备份数据清理间隔时间，单位为分钟

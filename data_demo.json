@@ -1,0 +1,7 @@
+{
+  "content": "级别状态：P2 报警\n策略名称：AgentId:1000051|磁盘利用率达到65%\n告警设备：192.168.1.1\n设备名称：测试测试测试\n设备备注：\n挂载节点：\ninner.k8s.k8s\n监控指标：disk.bytes.used.percent\n指标标签：mount=/app\n当前值：disk.bytes.used.percent: 75.13\n报警说明： disk.bytes.used.percent(all,60s) > 75\n触发时间：2099-12-31 12:59:59\n报警详情：http://n9e.example.cn:8080/mon/history/his/14338911\n报警策略：http://n9e.example.cn:8080/mon/strategy/32\n认领报警：http://n9e.example.cn:8080/mon/history/cur/441100",
+  "wxPhone": [
+    "18012345678",
+    "18112345678"
+  ]
+}
