@@ -5,7 +5,7 @@ import (
 	"bytes"
 	"crypto/tls"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -15,7 +15,7 @@ import (
 
 func WatchAndForward(dir, filePrefix string, fileSuffix string, targetURL string, timeout int, retryCount int, retryInterval int, sslVerify bool, headerKey string, headerValue string, encryptToken string, dataBackupEnable bool, dataBackupDir string) error {
 	for {
-		files, err := ioutil.ReadDir(dir)
+		files, err := os.ReadDir(dir)
 		if err != nil {
 			common.Logger.Errorf("Failed to read directory: %v", err)
 			time.Sleep(5 * time.Second)
@@ -27,7 +27,7 @@ func WatchAndForward(dir, filePrefix string, fileSuffix string, targetURL string
 			if strings.HasSuffix(fileName, fileSuffix) && strings.HasPrefix(fileName, filePrefix) {
 				filePath := filepath.Join(dir, file.Name())
 
-				// 解密和转发
+				// Decryption and Forwarding
 				err := processFile(filePath, targetURL, timeout, retryCount, retryInterval, sslVerify, headerKey, headerValue, encryptToken)
 				if err != nil {
 					common.Logger.Warnf("Failed to process file %s: %v", filePath, err)
@@ -49,7 +49,7 @@ func WatchAndForward(dir, filePrefix string, fileSuffix string, targetURL string
 						if err != nil {
 							common.Logger.Errorf("Failed to delete file: %v", err)
 							return err
-						} // 删除已处理的文件
+						} // Delete processed files
 					}
 				}
 			}
@@ -59,7 +59,7 @@ func WatchAndForward(dir, filePrefix string, fileSuffix string, targetURL string
 }
 
 func processFile(filePath, targetURL string, timeout int, retryCount int, retryInterval int, sslVerify bool, headerKey string, headerValue string, encryptToken string) error {
-	data, err := ioutil.ReadFile(filePath)
+	data, err := os.ReadFile(filePath)
 	if err != nil {
 		common.Logger.Errorf("failed to read encrypted file: %v", err)
 		return fmt.Errorf("failed to read encrypted file: %v", err)
@@ -82,7 +82,7 @@ func processFile(filePath, targetURL string, timeout int, retryCount int, retryI
 			return err
 		}*/
 
-	// 创建 HTTP 客户端
+	// Create an HTTP client
 	client := &http.Client{
 		Timeout: time.Duration(timeout) * time.Second,
 		Transport: &http.Transport{
@@ -124,9 +124,13 @@ func processFile(filePath, targetURL string, timeout int, retryCount int, retryI
 			}
 		}
 
+		if resp == nil {
+			return fmt.Errorf("failed to forward data: no response received")
+		}
+
 		// 处理响应
 		if resp.StatusCode != http.StatusOK {
-			body, _ := ioutil.ReadAll(resp.Body)
+			body, _ := io.ReadAll(resp.Body)
 			common.Logger.Warnf("Response status: %s", resp.Status)
 			common.Logger.Debugf("Failed to forward data: %s", body)
 			if attempt < retryCount-1 {
@@ -146,6 +150,7 @@ func processFile(filePath, targetURL string, timeout int, retryCount int, retryI
 		https://stackoverflow.com/questions/45617758/proper-way-to-release-resources-with-defer-in-a-loop
 		The whole point of defer is that it does not execute until the function returns, so the appropriate place to put it would be immediately after the resource you want to close is opened. However, since you're creating the resource inside the loop, you should not use defer at all - otherwise, you're not going to close any of the resources created inside the loop until the function exits, so they'll pile up until then. Instead, you should close them at the end of each loop iteration, without defer:
 	*/
+
 	/*resp, err := client.Do(req)
 	if err != nil {
 		return err
