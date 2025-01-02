@@ -1,9 +1,9 @@
 package main
 
 import (
-	"Alarm2File/internal/common"
-	"Alarm2File/internal/receiver"
-	"Alarm2File/internal/sender"
+	"Hedwig/internal/common"
+	"Hedwig/internal/receiver"
+	"Hedwig/internal/sender"
 )
 
 func main() {
