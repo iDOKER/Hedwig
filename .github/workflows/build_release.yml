@@ -32,7 +32,7 @@ jobs:
         mkdir -p dist
         GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o dist/Hedwig-${{ matrix.goos }}-${{ matrix.goarch }} ./cmd
 
-    - name: Archive Binaries
+    - name: Archive Binaries # 打包源码
       uses: actions/upload-artifact@v4
       with:
         name: hedwig-binaries-${{ matrix.goos }}-${{ matrix.goarch }}
