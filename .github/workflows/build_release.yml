@@ -30,7 +30,7 @@ jobs:
     - name: Build
       run: |
         mkdir -p dist
-        GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o dist/Hedwig-${{ matrix.goos }}-${{ matrix.goarch }}
+        GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o dist/Hedwig-${{ matrix.goos }}-${{ matrix.goarch }} ./cmd
 
     - name: Archive Binaries
       uses: actions/upload-artifact@v4
